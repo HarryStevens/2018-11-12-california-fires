@@ -1,0 +1,16 @@
+Notes from Daniel Swain, Weather West blog, Nov. 13, 2018
+
+noaa climate at a glance portal
+
+play around with data a little
+important part drill down time series for diff variables at diff time scales
+monthy, clusters of months
+statewide basis, and climate division basis
+
+AUTUMN PRECIPITATION important to be more nuanced... no long term trend in avg precip in calif. the point is not that avg annual precip decreasing. seasonality starting to change. transition from really wet to really dry years starting to change. sept oct nov – autumn precip – really consequently fraction, if we dont get water in fall, fire season extends indefinitely. that is part of a trend over last 4 decades or so. may help to focus on last 3, 4, 5 decades. that's when most changes happened. increase in fire behavior in 10 or 20 years.
+
+fire numbers trickier. calfire has some. climate signals – fire acreage. climate nexis actually has been keeping pretty close tabs. 
+
+calfire will have list of deadliest and most destructive. haven't updated list this year. a lot of ones should be on list should be in last 6 months. keep breaking records year on year now. 
+
+quantitive metrics of fire risks – john abatzoglou climate toolbox - dryness of vegetation. energy release component - how much energy will something release if you light a match? and arguably the climate link is through that metric. reason temp and precip matter effect things like soil moisture and energy release component. climate link is primarily effecting how dry vegetation is. how easily it burns. how intensely burns once on fire.

@@ -1,0 +1,113 @@
+# libs
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(tidyr)
+library(jsonlite)
+
+# lookups
+lookup_state_codes <- read_tsv("lookup/state-codes.tsv", col_names = c("state_code", "state_name"))
+leap_years <- c(1896, 1904, 1908, 1912, 1916, 1920, 1924, 1928, 1932, 1936, 1940, 1944, 1948, 1952, 1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016)
+
+# codes
+cooling_degree_days <- "cddcst"
+precipitation <- "pcpnst"
+palmer_drought_severity <- "pdsist"
+palmer_hydrological_drought <- "phdist"
+palmer_modified_drought <- "pmdist"
+spi_1month <- "sp01st"
+spi_2months <- "sp02st"
+spi_3months <- "sp03st"
+spi_6months <- "sp06st"
+spi_9months <- "sp09st"
+spi_1year <- "sp12st"
+spi_2years <- "sp24st"
+max_temperature <- "tmaxst"
+min_temperature <- "tminst"
+avg_temperature <- "tmpcst"
+palmer_z_index <- "zndxst"
+
+# read data
+df <- read_table(make_url(avg_temperature), col_names = c("id", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")) %>%
+  mutate(
+    state_code = substr(id, 1, 3),
+    division_number = substr(id, 4, 4),
+    element_code = substr(id, 5, 6),
+    year = substr(id, 7, 10),
+    nov = ifelse(nov < 0, 0, nov),
+    dec = ifelse(dec < 0, 0, dec)
+  ) %>%
+  left_join(
+    lookup_state_codes, by = "state_code"
+  )
+
+df_calif <- df %>% filter(state_name == "California")
+
+df_calif_oct <- df %>%
+  filter(state_name == "California") %>%
+  mutate(value = oct) %>%
+  select(state_name, year, value)
+
+df_calif_oct_sep <- df %>%
+  filter(state_name == "California") %>%
+  mutate(value = ((oct * 31) + (sep * 30)) / 61) %>%
+  select(state_name, year, value)
+
+df_calif_annual_thru_oct <- df %>%
+  filter(state_name == "California") %>%
+  mutate(
+    value = (
+      (jan * 31) +
+      (feb * ifelse(year %in% leap_years, 29, 28)) +
+      (mar * 31) +
+      (apr * 30) +
+      (may * 31) +
+      (jun * 30) +
+      (jul * 31) +
+      (aug * 31) +
+      (sep * 30) +
+      (oct * 31)
+      ) / 
+      (ifelse(year %in% leap_years, 305, 304)
+    )
+  ) %>%
+  select(state_name, year, value)
+
+df_1950_to_2017 <- df %>%
+  filter(state_name == "California", year > 1899, year < 2018) %>%
+  mutate(
+    value = (
+      (jan * 31) +
+      (feb * ifelse(year %in% leap_years, 29, 28)) +
+      (mar * 31) +
+      (apr * 30) +
+      (may * 31) +
+      (jun * 30) +
+      (jul * 31) +
+      (aug * 31) +
+      (sep * 30) +
+      (oct * 31) +
+      (nov * 30) +
+      (dec * 31)
+    ) / 
+      (ifelse(year %in% leap_years, 366, 365)
+      )
+  ) %>%
+  select(state_name, year, value)  
+
+plot <- ggplot(
+  data = filter(df_1950_to_2017),
+  mapping = aes(
+    x = ymd(paste0(year, "0101")),
+    y = value
+  )
+)
+
+plot + geom_point() + geom_smooth(method = "loess")
+
+write_lines(toJSON(df_1950_to_2017), "../../src/data/cali-temp_1950-2017.json")
+
+make_url <- function(parameter){
+  return(paste0("https://www1.ncdc.noaa.gov/pub/data/cirs/climdiv/climdiv-", parameter, "-v1.0.0-20181105"))
+}

@@ -1,0 +1,20 @@
+{
+  "OBJECTID": 1,
+  "YEAR_": "2007",
+  "STATE": "CA",
+  "AGENCY": "CCO",
+  "UNIT_ID": "LAC",
+  "FIRE_NAME": "OCTOBER",
+  "INC_NUM": "00246393",
+  "ALARM_DATE": "2007/10/21 00:00:00",
+  "CONT_DATE": "2007/10/23 00:00:00",
+  "CAUSE": 14,
+  "COMMENTS": "",
+  "REPORT_AC": null,
+  "GIS_ACRES": 25.736713409423828,
+  "C_METHOD": 8,
+  "OBJECTIVE": 1,
+  "FIRE_NUM": "00233414",
+  "Shape_Length": 1902.4390512932023,
+  "Shape_Area": 104152.78105446616
+}

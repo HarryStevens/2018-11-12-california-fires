@@ -1,0 +1,29 @@
+# Built project files
+.tmp
+dist
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directories
+node_modules
+jspm_packages
+
+# Optional npm cache directory
+.npm
+.aws_cache
+
+#Other
+.DS_Store
+.env
+
+# Giant files
+admin/data/geospatial
+admin/analyze-geojson/geospatial-data.geojson

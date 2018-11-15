@@ -1,0 +1,15 @@
+{
+  "project": {
+    "name": "2018 11 12 california fires",
+    "slug": "2018-11-12-california-fires"
+  },
+  "s3": {
+    "bucket": "graphics.axios.com",
+    "folder": "2018-11-12-california-fires"
+  },
+  "files": [],
+  "isFullbleed": false,
+  "appleFallback": "fallbacks/2018-11-12-california-fires-apple.png",
+  "newsletterFallback": "fallbacks/2018-11-12-california-fires-fallback.png",
+  "embedVersion": "1.0"  
+}
