@@ -196,13 +196,12 @@ function main() {
 
       selectAll(".select-text text")
           .style("text-anchor", d.year > 2010 ? "end" : "middle");
-
-
     }
     function out(d){
       selectAll(".dot-" + d.year).classed("selected", 0);
       lines.raise();
       select_text.classed("show", 0);
+      over(data[0].data.filter(f => f.year === 2017)[0]);
     }
 
   }
