@@ -153,7 +153,6 @@ function main() {
       select(".y-axis." + facet.variable)
           .attr("transform", "translate(" + width + ", 0)")
           .call(facet.y_axis_generator);
-
     });
 
     over(data[0].data.filter(f => f.year === 2017)[0])
@@ -207,7 +206,6 @@ function main() {
   }
 
   draw();
-
 
   window.addEventListener("optimizedResize", draw);
 
